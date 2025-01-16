@@ -1,24 +1,29 @@
 const games = [
     {
         title:"Red Light, Green Light",
-        hint:"Move when green light shows, freeze on red light."
+        hint:"Move when green light shows, freeze on red light.",
+        bg:"bg1.jpg"
     },
     {
         title:"Dalgona Challenge",
-        hint:"Carefully cut out the shape without breaking it."
+        hint:"Carefully cut out the shape without breaking it.",
+        bg:"bg2.jpg"
     },
     {
         title:"Tug of War",
-        hint:"Pull together as a team to victory."
+        hint:"Pull together as a team to victory.",
+        bg:"bg5.jpg"
     },
     {
         title:"Marbles",
-        hint:"Strategic marble game with your partner."
+        hint:"Strategic marble game with your partner.",
+        bg:"bg6.jpg"
     },
     {
         title:"Glass Bridge",
-        hint:"Choose the right path across the bridge."
-    } 
+        hint:"Choose the right path across the bridge.",
+        bg:"bg7.jpg"
+    }
 ];
 
 let currentGame = 0;
@@ -34,10 +39,10 @@ function createGamePages() {
         gameDiv.id = `game${index}`;
         gameDiv.innerHTML = `
             <div class="game-container">
-                <div class="game-content" style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url('./images/bg5.jpg');">
-                    <h2 class="game-title">${game.title}</h2>
+                <div class="game-content" style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url('./images/${game.bg}');">
+                    <h1 class="game-title">${game.title}</h1>
+                    <h3>${game.hint}</h3>
                     <div class="countdown" id="countdown${index}">01:00</div>
-                    <h2>${game.hint}</h2>
                 </div>
                 <div class="side-roadmap">
                     <h1 class="title" >GAMES</h1>
@@ -121,8 +126,12 @@ var overSound = new Audio('./sounds/game-over.mp3');
 
 
 
-var startSound = new Audio('./sounds/jooWon.mp3');
+var startSound = new Audio('./sounds/JooWon.mp3');
 startSound.loop = true;
+
+startSound.onerror = (e) => {
+    console.error('Error loading sound:', e);
+};
 
 window.addEventListener('click', (e) => {
     if(currentGame == 0)

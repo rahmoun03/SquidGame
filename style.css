@@ -6,6 +6,12 @@
     font-weight: bold;
 }
 
+@font-face {
+    font-family: "Casio";
+    src: url('./fonts/digital-7/digital-7.ttf') format('woff2');
+    font-weight: bold;
+}
+
 :root {
     --pink: #ff0087;
     --dark-pink: #ce006c;
@@ -27,6 +33,7 @@ body {
     background-color: var(--dark-blue);
     color: var(--white);
     transition: all 0.3s ease;
+    overflow-x: hidden;
 }
 
 .leets-logo{
@@ -35,23 +42,31 @@ body {
     -o-object-fit: contain;
     object-fit: contain;
     width: 15rem;
-    top: 10px;
-    right: 50px;
+    top: 20px;
+    right: 20px;
 }
 
 .landing-page {
-    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url('./images/bg1.jpg');
-    background-position: center center;
-    background-size: cover;
-    background-repeat: no-repeat;
+    display: none;
     height: 100vh;
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 2rem;
 }
-
+.loby {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    width: 100%;
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url('./images/bg7.jpg');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 .title {
     font-family: 'Game Of Squids';
     color: var(--pink);
@@ -62,8 +77,6 @@ body {
 .roadmap {
     place-content: center;
     /* place-items: center; */
-    position: fixed;
-    bottom: 0%;
     height: 20%;
     width: 100%;
     background: rgba(255, 255, 255, 0.4);
@@ -145,11 +158,11 @@ body {
 }
 
 .countdown {
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Casio', monospace;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: white;
-    font-size: 10rem;
+    font-size: 12rem;
     color: var(--teal);
     text-align: center;
     margin: 2rem 0;
@@ -175,4 +188,123 @@ body {
 
 .start-button:hover {
     background-color: var(--dark-pink);
+}
+
+
+
+
+
+
+/* registeration  */
+
+.registration-page {
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.7) 100%), url('./images/bg7.jpg');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}
+
+
+.registration-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 800px;
+    margin-top: 2rem;
+}
+
+.participants-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.participant-card {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.participant-number {
+    color: var(--teal);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--pink);
+    border-radius: 5px;
+    padding: 0.5rem;
+    color: var(--white);
+    font-size: 1rem;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--teal);
+    box-shadow: 0 0 5px var(--teal);
+}
+
+.buttons-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.button {
+    background-color: var(--pink);
+    color: var(--white);
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background-color: var(--dark-pink);
+    transform: scale(1.05);
+}
+
+.button:disabled {
+    background-color: #666;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.validation-message {
+    color: var(--pink);
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+}
+
+.shake {
+    animation: shake 0.5s ease-in-out;
 }
