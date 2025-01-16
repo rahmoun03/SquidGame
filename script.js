@@ -60,8 +60,12 @@ function startGames() {
 }
 
 function startCountdown(gameIndex) {
-    let timeLeft = isPreGameCountdown ? 1 : 10; // 1 minute or 5 minutes
+    let timeLeft = isPreGameCountdown ? 5 : 20; // 1 minute or 5 minutes
     const countdownElement = document.getElementById(`countdown${gameIndex}`);
+    if (isPreGameCountdown)
+        countdownElement.style.color = 'yellow';
+    else
+        countdownElement.style.color = '#12b886';
     
     timer = setInterval(() => {
         const minutes = Math.floor(timeLeft / 60);
@@ -85,6 +89,10 @@ function startCountdown(gameIndex) {
                 {
                     document.getElementById(`game${currentGame}`).style.display = 'none';
                     document.getElementById('gameOver').style.display = "flex";
+                    timerSound.pause();
+                    startSound.pause();
+
+                    overSound.play();
                 }
             }
         }
@@ -96,6 +104,11 @@ window.addEventListener('keypress', (e)=> {
     console.log(e.key);
     
     if(e.key === 'Enter' && currentGame == 0){
+        // startSound.pause();
+        timerSound.play();
+        timerSound.loop = true;
+
+
         isPreGameCountdown = true;
         currentGame = 0;
         clearInterval(timer);
@@ -103,5 +116,17 @@ window.addEventListener('keypress', (e)=> {
     }
 })
 
+var timerSound = new Audio('./sounds/timer.mp3');
+var overSound = new Audio('./sounds/game-over.mp3');
+
+
+
+var startSound = new Audio('./sounds/jooWon.mp3');
+startSound.loop = true;
+
+window.addEventListener('click', (e) => {
+    if(currentGame == 0)
+        startSound.play();
+});
+
 createGamePages();
-gameOver();

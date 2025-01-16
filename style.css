@@ -26,6 +26,7 @@ body {
     width: 100vw;
     background-color: var(--dark-blue);
     color: var(--white);
+    transition: all 0.3s ease;
 }
 
 .leets-logo{
@@ -39,7 +40,7 @@ body {
 }
 
 .landing-page {
-    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url('./images/bg7.jpg');
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url('./images/bg1.jpg');
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -108,6 +109,7 @@ body {
     display: none;
     height: 100vh;
     padding: 2rem;
+    transition: all 1s ease;
 }
 
 .game-container {

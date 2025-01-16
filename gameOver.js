@@ -80,11 +80,6 @@ over.innerHTML =  `
 `;
 
 
-// Start confetti when page loads
-window.addEventListener('load', () => {
-    createConfetti();
-});
-
 content.appendChild(style);
 content.appendChild(over);
 content.style.display = "none";
