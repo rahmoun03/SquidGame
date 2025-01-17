@@ -71,7 +71,7 @@ body {
     font-family: 'Game Of Squids';
     color: var(--pink);
     text-align: center;
-    text-shadow: 2px 2px var(--dark-pink);
+    /* text-shadow: 2px 2px var(--dark-pink); */
 }
 
 .roadmap {
@@ -206,6 +206,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     padding: 2rem;
 }
 

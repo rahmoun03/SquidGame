@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const card = document.createElement('div');
             card.className = 'participant-card';
             card.innerHTML = `
-                <div class="participant-number">Player ${index + 1}</div>
+                <div class="participant-number">Player 00${index}</div>
                 <div class="input-group">
                     <input 
                         type="text" 
@@ -40,22 +40,13 @@ document.addEventListener("DOMContentLoaded", () => {
                         value="${participant.name}"
                         id="nameInput${index}"
                     >
-                    <input 
-                        type="text" 
-                        placeholder="Number" 
-                        value="${participant.number}"
-                        id="numberInput${index}"
-                        maxlength="3"
-                    >
                 </div>
             `;
             grid.appendChild(card);
                     // Add event listeners instead of using inline oninput
             document.getElementById(`nameInput${index}`).addEventListener('input', (event) => {
                 updateParticipant(index, 'name', event.target.value);
-            });
-            document.getElementById(`numberInput${index}`).addEventListener('input', (event) => {
-                updateParticipant(index, 'number', event.target.value);
+                updateParticipant(index, 'number', `00${index}`);
             });
         });
     }
@@ -70,27 +61,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const validationMessage = document.getElementById('validationMessage');
         
         // Check if all participants have name and number
-        const isComplete = participants.every(p => p.name.trim() && p.number.trim());
-        
-        // Check for duplicate numbers
-        const numbers = participants.map(p => p.number.trim()).filter(n => n);
-        const hasDuplicates = new Set(numbers).size !== numbers.length;
+        const isComplete = participants.every(p => p.name.trim());
 
-        // Check if numbers are between 1 and 456
-        const validNumbers = participants.every(p => {
-            const num = parseInt(p.number);
-            return !p.number || (num >= 1 && num <= 456);
-        });
-
-        startButton.disabled = !isComplete || hasDuplicates || !validNumbers;
+        startButton.disabled = !isComplete;
 
         if (!isComplete) {
             validationMessage.textContent = 'Please fill in all participant details';
-        } else if (hasDuplicates) {
-            validationMessage.textContent = 'Each participant must have a unique number';
-        } else if (!validNumbers) {
-            validationMessage.textContent = 'Numbers must be between 1 and 456';
-        } else {
+        }
+        else {
             validationMessage.textContent = '';
         }
     }

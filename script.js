@@ -2,27 +2,32 @@ const games = [
     {
         title:"Red Light, Green Light",
         hint:"Move when green light shows, freeze on red light.",
-        bg:"bg1.jpg"
+        bg:"bg1.jpg",
+        time: 60
     },
     {
         title:"Dalgona Challenge",
         hint:"Carefully cut out the shape without breaking it.",
-        bg:"bg2.jpg"
+        bg:"bg2.jpg",
+        time: 60
     },
     {
         title:"Tug of War",
         hint:"Pull together as a team to victory.",
-        bg:"bg5.jpg"
+        bg:"bg5.jpg",
+        time: 60
     },
     {
         title:"Marbles",
         hint:"Strategic marble game with your partner.",
-        bg:"bg6.jpg"
+        bg:"bg6.jpg",
+        time: 60
     },
     {
         title:"Glass Bridge",
         hint:"Choose the right path across the bridge.",
-        bg:"bg7.jpg"
+        bg:"bg7.jpg",
+        time: 60
     }
 ];
 
@@ -84,11 +89,11 @@ function startCountdown(gameIndex) {
                 startCountdown(gameIndex);
             } else {
                 if (currentGame < games.length - 1) {
-                    document.getElementById(`game${currentGame}`).style.display = 'none';
+                    // document.getElementById(`game${currentGame}`).style.display = 'none';
                     currentGame++;
-                    document.getElementById(`game${currentGame}`).style.display = 'block';
-                    isPreGameCountdown = true;
-                    startCountdown(currentGame);
+                    // document.getElementById(`game${currentGame}`).style.display = 'block';
+                    // isPreGameCountdown = true;
+                    // startCountdown(currentGame);
                 }
                 else
                 {
@@ -119,23 +124,35 @@ window.addEventListener('keypress', (e)=> {
         clearInterval(timer);
         startGames();
     }
+    if(e.key === ' ' && currentGame > 0){
+        document.getElementById(`game${currentGame - 1}`).style.display = 'none';
+        document.getElementById(`game${currentGame}`).style.display = 'block';
+        isPreGameCountdown = true;
+        startCountdown(currentGame);
+    }
+
 })
 
 var timerSound = new Audio('./sounds/timer.mp3');
+timerSound.loop = true;
+timerSound.volume = 0.8;
+
 var overSound = new Audio('./sounds/game-over.mp3');
-
-
+overSound.loop = true;
+overSound.volume = 0.5;
 
 var startSound = new Audio('./sounds/JooWon.mp3');
 startSound.loop = true;
+startSound.volume = 0.5;
+
 
 startSound.onerror = (e) => {
     console.error('Error loading sound:', e);
 };
 
 window.addEventListener('click', (e) => {
-    if(currentGame == 0)
-        startSound.play();
+    // if(currentGame == 0)
+        // startSound.play();
 });
 
 createGamePages();
