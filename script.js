@@ -2,38 +2,34 @@ const games = [
     {
         title:"Red Light, Green Light",
         hint:"Move when green light shows, freeze on red light.",
-        bg:"bg1.jpg",
+        bg:"GAME_1.jpg",
         time: 60
     },
     {
         title:"Dalgona Challenge",
         hint:"Carefully cut out the shape without breaking it.",
-        bg:"bg2.jpg",
-        time: 60
+        bg:"GAME_2.jpg",
+        time: 120
     },
     {
-        title:"Tug of War",
+        title:"Jokenpô",
         hint:"Pull together as a team to victory.",
-        bg:"bg5.jpg",
+        bg:"GAME_3.jpg",
         time: 60
     },
     {
         title:"Marbles",
         hint:"Strategic marble game with your partner.",
-        bg:"bg6.jpg",
+        bg:"GAME_4.jpg",
         time: 60
     },
-    {
-        title:"Glass Bridge",
-        hint:"Choose the right path across the bridge.",
-        bg:"bg7.jpg",
-        time: 60
-    }
 ];
 
 let currentGame = 0;
-let isPreGameCountdown;
+let isPreGameCountdown = true;
 let timer;
+let start = true;
+let finish = true;
 
 
 function createGamePages() {
@@ -44,19 +40,9 @@ function createGamePages() {
         gameDiv.id = `game${index}`;
         gameDiv.innerHTML = `
             <div class="game-container">
-                <div class="game-content" style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url('./images/${game.bg}');">
-                    <h1 class="game-title">${game.title}</h1>
-                    <h3>${game.hint}</h3>
-                    <div class="countdown" id="countdown${index}">01:00</div>
+                <div class="game-content" style="background-image: url('./images/${game.bg}');">
                 </div>
-                <div class="side-roadmap">
-                    <h1 class="title" >GAMES</h1>
-                    <div class="side-roadmap-items">
-                        ${games.map((g, i) => `
-                            <div class="roadmap-item ${i === index ? 'active' : ''}">${g.title}</div>
-                        `).join('')}
-                    </div>
-                </div>
+                <div class="countdown" id="countdown${index}"><span>00:30</span></div>
             </div>
         `;
         container.appendChild(gameDiv);
@@ -70,13 +56,21 @@ function startGames() {
 }
 
 function startCountdown(gameIndex) {
-    let timeLeft = isPreGameCountdown ? 5 : 20; // 1 minute or 5 minutes
-    const countdownElement = document.getElementById(`countdown${gameIndex}`);
+    finish = false;
+    timerSound.play();
+    let timeLeft = isPreGameCountdown ? 20 : games[currentGame].time; // 1 minute or 5 minutes
+    const parent =  document.getElementById(`countdown${gameIndex}`);
+    const countdownElement = parent.querySelector('span');
     if (isPreGameCountdown)
-        countdownElement.style.color = 'yellow';
-    else
-        countdownElement.style.color = '#12b886';
-    
+        countdownElement.style.color = '#249f9c';
+    else{
+        countdownElement.style.color = '#fff';
+        if (gameIndex == 0){
+            startSound.pause();
+            red_green.play();
+        }
+    }
+
     timer = setInterval(() => {
         const minutes = Math.floor(timeLeft / 60);
         const seconds = timeLeft % 60;
@@ -89,11 +83,12 @@ function startCountdown(gameIndex) {
                 startCountdown(gameIndex);
             } else {
                 if (currentGame < games.length - 1) {
-                    // document.getElementById(`game${currentGame}`).style.display = 'none';
-                    currentGame++;
-                    // document.getElementById(`game${currentGame}`).style.display = 'block';
-                    // isPreGameCountdown = true;
-                    // startCountdown(currentGame);
+                    if (gameIndex == 0){
+                        red_green.pause();
+                        startSound.play();
+                    }
+                    finish = true;
+                    timerSound.pause();
                 }
                 else
                 {
@@ -101,7 +96,6 @@ function startCountdown(gameIndex) {
                     document.getElementById('gameOver').style.display = "flex";
                     timerSound.pause();
                     startSound.pause();
-
                     overSound.play();
                 }
             }
@@ -113,19 +107,20 @@ function startCountdown(gameIndex) {
 window.addEventListener('keypress', (e)=> {
     console.log(e.key);
     
-    if(e.key === 'Enter' && currentGame == 0){
-        // startSound.pause();
+    if(e.key === 'Enter' && currentGame == 0 && start){
         timerSound.play();
         timerSound.loop = true;
 
-
+        start = false;
         isPreGameCountdown = true;
         currentGame = 0;
         clearInterval(timer);
         startGames();
     }
-    if(e.key === ' ' && currentGame > 0){
-        document.getElementById(`game${currentGame - 1}`).style.display = 'none';
+    if(e.key === ' ' && currentGame < games.length - 1 && !isPreGameCountdown && finish){
+        timerSound.pause();
+        document.getElementById(`game${currentGame}`).style.display = 'none';
+        currentGame++;
         document.getElementById(`game${currentGame}`).style.display = 'block';
         isPreGameCountdown = true;
         startCountdown(currentGame);
@@ -145,14 +140,13 @@ var startSound = new Audio('./sounds/JooWon.mp3');
 startSound.loop = true;
 startSound.volume = 0.5;
 
-
-startSound.onerror = (e) => {
-    console.error('Error loading sound:', e);
-};
+var red_green = new Audio('./sounds/red_green.mp3');
+red_green.loop = true;
+red_green.volume = 1;
 
 window.addEventListener('click', (e) => {
-    // if(currentGame == 0)
-        // startSound.play();
+    if(currentGame == 0)
+        startSound.play();
 });
 
 createGamePages();

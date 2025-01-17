@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 
 @font-face {
     font-family: "Game Of Squids";
@@ -10,6 +12,7 @@
     font-family: "Casio";
     src: url('./fonts/digital-7/digital-7.ttf') format('woff2');
     font-weight: bold;
+
 }
 
 :root {
@@ -36,30 +39,20 @@ body {
     overflow-x: hidden;
 }
 
-.leets-logo{
-    position: fixed;
-    height: 15rem;
-    -o-object-fit: contain;
-    object-fit: contain;
-    width: 15rem;
-    top: 20px;
-    right: 20px;
-}
 
 .landing-page {
-    display: none;
+    display: flex;
     height: 100vh;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
 }
 .loby {
     display: flex;
     flex-direction: column;
-    height: 80%;
+    height: 100%;
     width: 100%;
-    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url('./images/bg7.jpg');
+    background-image: url('./images/TV.jpg');
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -71,57 +64,11 @@ body {
     font-family: 'Game Of Squids';
     color: var(--pink);
     text-align: center;
-    /* text-shadow: 2px 2px var(--dark-pink); */
-}
-
-.roadmap {
-    place-content: center;
-    /* place-items: center; */
-    height: 20%;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.4);
-    padding: 1rem;
-}
-
-.roadmap-items {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.side-roadmap-items {
-    height: 100%;
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.roadmap-item {
-    border-radius: 50%;
-    border: 2px solid var(--white);
-    width: 100px;
-    height: 100px;
-    place-content: center;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: var(--white);
-    padding: 0.5rem;
-}
-
-.roadmap-item.active {
-    box-shadow: 1px 1px 10px var(--dark-pink);
-    border: 2px solid var(--pink);
-    color: var(--pink);
-    font-weight: bold;
 }
 
 .game-page {
     display: none;
     height: 100vh;
-    padding: 2rem;
     transition: all 1s ease;
 }
 
@@ -138,174 +85,31 @@ body {
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     text-align: center;
     place-content: center;
     place-items: center;
-}
-
-.side-roadmap {
-    display: flex;
-    flex-direction: column;
-    place-content: center;
-    place-items: center;
-    height: 100%;
-    width: 20%;
-    background: rgba(255, 255, 255, 0.4);
-    padding: 1rem;
 }
 
 .countdown {
-    font-family: 'Casio', monospace;
+    display: flex;
+    position: fixed;
+    bottom: 130px;
+    right: 210px;
+    color: var(--white);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    place-content: center;
+    place-items: center;
+}
+
+.countdown span{
+    font-family: "Montserrat", serif;
+    font-weight: bold;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: white;
-    font-size: 12rem;
-    color: var(--teal);
-    text-align: center;
-    margin: 2rem 0;
-}
-
-.game-title {
-    font-size: 4rem;
-    color: var(--pink);
-    margin-bottom: 1rem;
-}
-
-.start-button {
-    background-color: var(--pink);
-    color: var(--white);
-    border: none;
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 2rem;
-    transition: background-color 0.3s;
-}
-
-.start-button:hover {
-    background-color: var(--dark-pink);
-}
-
-
-
-
-
-
-/* registeration  */
-
-.registration-page {
-    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.7) 100%), url('./images/bg7.jpg');
-    background-position: center center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-}
-
-
-.registration-container {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    border-radius: 15px;
-    padding: 2rem;
-    width: 100%;
-    max-width: 800px;
-    margin-top: 2rem;
-}
-
-.participants-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-.participant-card {
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.participant-number {
-    color: var(--teal);
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-.input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-input {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--pink);
-    border-radius: 5px;
-    padding: 0.5rem;
-    color: var(--white);
-    font-size: 1rem;
-}
-
-input:focus {
-    outline: none;
-    border-color: var(--teal);
-    box-shadow: 0 0 5px var(--teal);
-}
-
-.buttons-container {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin-top: 2rem;
-}
-
-.button {
-    background-color: var(--pink);
-    color: var(--white);
-    border: none;
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.button:hover {
-    background-color: var(--dark-pink);
-    transform: scale(1.05);
-}
-
-.button:disabled {
-    background-color: #666;
-    cursor: not-allowed;
-    transform: none;
-}
-
-.validation-message {
-    color: var(--pink);
-    font-size: 0.9rem;
-    margin-top: 1rem;
-    text-align: center;
-}
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-}
-
-.shake {
-    animation: shake 0.5s ease-in-out;
+    font-size : 12rem;
 }
